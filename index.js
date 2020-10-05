@@ -1,3 +1,4 @@
+/* Import and start server */
 const server = require("./server");
 const PORT = process.env.PORT || 3000; 
 

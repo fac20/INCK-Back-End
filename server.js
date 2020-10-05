@@ -1,3 +1,4 @@
+/* Build and export server */
 const express = require("express");
 require("dotenv").config();
 const handleErrors = require('./middleware/errorHandling');
@@ -16,8 +17,10 @@ server.use(cors());
 server.use(express.json());
 server.use(cookieParser());
 
-//server routes
-
+//server routes CRUD
+//login, signup (POST)
+//users change password (PUT)
+//Data we're saving (content) - C,R,U,D
 
 
 //error handling middleware

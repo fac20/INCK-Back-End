@@ -23,7 +23,10 @@
     "tape": "^5.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "testServer": "NODE_ENV=test tape 'tests/server.test.js' | tap-spec",
+    "test": "NODE_ENV=test tape 'tests/*' | tap-spec",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
