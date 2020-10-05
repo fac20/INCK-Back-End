@@ -18,6 +18,7 @@ server.use(express.json());
 server.use(cookieParser());
 
 //server routes CRUD
+
 //login, signup (POST)
 //users change password (PUT)
 //Data we're saving (content) - C,R,U,D
