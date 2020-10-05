@@ -1,4 +1,3 @@
-  
 const users = require('../models/userModels');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -28,4 +27,13 @@ function signup(req, res, next) {
 			res.status(201).send(response);
 		})
 		.catch(next);
+}
+
+// function login (req, res, next) {
+	
+// }
+
+module.exports = {
+ signup,
+ //login
 }

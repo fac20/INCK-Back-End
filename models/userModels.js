@@ -14,9 +14,13 @@ function addUser(user) {
               [user.username, user.password]
           )
     })
-    .then(result => console.log(result))
+    //.then(result => console.log(result))
     .then(result => result.rows[0])
     .catch(error)
 }
 
 //addUser();
+
+module.exports = {
+    addUser,
+}
