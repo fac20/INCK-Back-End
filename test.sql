@@ -21,5 +21,24 @@ CREATE TABLE play (
     play_time INTEGER
 );
 
+--  Insert data into table for testing
+
+INSERT INTO users (username,password) VALUES
+('TheBaddestB','beyonce'),
+('Santa25', 'hoehoe'),
+('CodeWizzard', 'npmInstall1')
+;
+
+INSERT INTO work (user_id,work_time) VALUES
+(1,69),
+(2,30),
+(3,20)
+;
+
+INSERT INTO play (user_id,play_time) VALUES
+(1,30),
+(2,60),
+(3,69)
+;
 
 COMMIT;
