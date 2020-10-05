@@ -4,9 +4,6 @@ node_js:
 install:
   - npm install -g codecov
   - npm ci
-cache:
-  directories:
-    - node_modules
 services:
   - postgresql
 # before_script:
@@ -21,4 +18,3 @@ cache:
 script:
   - npm run test
   # - npm run report-test
-
