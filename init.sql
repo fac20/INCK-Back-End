@@ -12,16 +12,16 @@ CREATE TABLE users (
 CREATE TABLE work (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    work_time INTERGER
+    work_time INTEGER
 );
 
 CREATE TABLE play (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFRENCES users(id),
+    user_id INTEGER REFERENCES users(id),
     play_time INTEGER
 );
 
-// Insert data into table for testing
+--  Insert data into table for testing
 
 INSERT INTO users (username,password) VALUES
 ('TheBaddestB','beyonce'),
