@@ -2,7 +2,11 @@
 const express = require("express");
 require("dotenv").config();
 const handleErrors = require('./middleware/errorHandling');
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
+const usersHandlers = './handlers/usersHandlers';
+const workHandlers = './handlers/workHandlers';
+const playHandlers = './handlers/playHandlers;
+
 
 const server = express();
 
@@ -18,12 +22,28 @@ server.use(cors());
 server.use(express.json());
 server.use(cookieParser());
 
-//server routes CRUD
-
 //login, signup (POST)
-//users change password (PUT)
-//Data we're saving (content) - C,R,U,D
+server.post('/signup', usersHandlers.signup);
+server.post('/login', usersHandlers.login);
 
+//users change password (PUT)
+server.put('/change-password', usersHandlers.changePass);
+
+//submit work and play log
+server.post('/post-work', workHandlers.addWork);
+server.post('/post-play', playHandlers.addPlay);
+
+//view work and play data
+server.get('/work', workHandlers.getWork);
+server.get('/play', playHandlers.getPlay);
+
+//edit work and play data
+server.put('/edit-work', workHandlers.modifyWork);
+server.put('/edit-play', playHandlers.modifyPlay);
+
+//delete work and play data
+server.delete('/delete-work', workHandlers.deleteWork);
+server.delete('/delete-play', playHandlers.deletePlay);
 
 //error handling middleware
 server.use(handleErrors);
