@@ -2,6 +2,7 @@
 const express = require("express");
 require("dotenv").config();
 const handleErrors = require('./middleware/errorHandling');
+const cookieParser = require("cookie-parser")
 
 const server = express();
 
