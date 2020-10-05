@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - 14.5
+env:
+cache:
+  directories:
+    - node_modules
+services:
+  - postgresql
+before_script:
+  - npm install
+  # - psql -c 'create database bbtest;' -U postgres
+script:
+  - npm run test
+  - npm run report-test
