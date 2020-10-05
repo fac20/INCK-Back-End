@@ -1,6 +1,5 @@
 const express = require("express");
 require("dotenv").config();
-const PORT = process.env.PORT || 3000; 
 const handleErrors = require('./middleware/errorHandling');
 
 const server = express();
@@ -24,5 +23,5 @@ server.use(cookieParser());
 //error handling middleware
 server.use(handleErrors);
 
-server.listen(PORT, () => 
-    console.log(`Listening on port http:localhost:${3000}`))
+
+module.exports = server; 
