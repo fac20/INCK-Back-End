@@ -16,7 +16,7 @@ function addUser(user) {
     })
     //.then(result => console.log(result))
     .then(result => result.rows[0])
-    .catch(error)
+    .catch(error => error);
 }
 
 //addUser();
