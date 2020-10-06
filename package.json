@@ -24,7 +24,7 @@
   },
   "scripts": {
     "testServer": "NODE_ENV=test tape 'tests/server.test.js' | tap-spec",
-    "test": "NODE_ENV=test tape './tests/*' | tap-spec",
+    "test": "NODE_ENV=test tape 'tests/*' | tap-spec",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
