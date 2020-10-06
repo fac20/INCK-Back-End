@@ -31,7 +31,7 @@ server.post('/login', usersHandlers.login);
 
 // //submit work and play log
 server.post('/post-work', authenticate, workHandlers.addWork);
-// server.post('/post-play', playHandlers.addPlay);
+// server.post('/post-play', authenticate, playHandlers.addPlay);
 
 // //view work and play data
 // server.get('/work', workHandlers.getWork);

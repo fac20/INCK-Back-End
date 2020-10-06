@@ -7,6 +7,7 @@ const SECRET = process.env.JWT_SECRET;
 
 function authenticate(req, res, next) {
   const authHeader = req.headers.authorization;
+
   if (!authHeader) {
     const error = new Error('Unauthorised!');
     error.status = 400;
@@ -20,8 +21,6 @@ function authenticate(req, res, next) {
     users
       .findUser(tokenData.id) //check ID actually exists
       .then(user => {
-        console.log(user);
-        req.user = user;
         next();
       })
       .catch(next);
