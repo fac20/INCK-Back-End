@@ -1,21 +1,20 @@
 /* Build and export server */
-const express = require("express");
-require("dotenv").config();
+const express = require('express');
+require('dotenv').config();
 const handleErrors = require('./middleware/errorHandling');
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 const usersHandlers = require('./handlers/usersHandlers');
 const workHandlers = require('./handlers/workHandlers');
 const playHandlers = require('./handlers/playHandlers');
 
-
 const server = express();
 
 //cors middleware allows access from our frontend on netlify
-const cors = require("cors");
+const cors = require('cors');
 const corsOptions = {
-	origin: "https://zenpal.netlify.app/",
-	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+  origin: 'https://zenpal.netlify.app/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 //server middleware
 server.use(cors());
@@ -24,7 +23,7 @@ server.use(cookieParser());
 
 //login, signup (POST)
 server.post('/signup', usersHandlers.signup);
-//server.post('/login', usersHandlers.login);
+server.post('/login', usersHandlers.login);
 
 // //users change password (PUT)
 // server.put('/change-password', usersHandlers.changePass);
@@ -48,5 +47,4 @@ server.post('/signup', usersHandlers.signup);
 //error handling middleware
 server.use(handleErrors);
 
-
-module.exports = server; 
+module.exports = server;
