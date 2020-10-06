@@ -1,14 +1,14 @@
 language: node_js
 node_js:
   - 14.5
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
 install:
   - npm install
   - npm install -g codecov
   - npm ci
-services:
-  - postgresql
-# before_script:
-#   - npm install
 cache:
   # Caches $HOME/.npm when npm ci is default script command
   # Caches node_modules in all other cases
@@ -19,3 +19,5 @@ cache:
 script:
   - npm run test
   # - npm run report-test
+env: 
+  - 
