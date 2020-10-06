@@ -19,5 +19,4 @@ cache:
 script:
   - npm run test
   # - npm run report-test
-env: 
-  - 
+
