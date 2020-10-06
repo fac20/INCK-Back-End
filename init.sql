@@ -12,13 +12,15 @@ CREATE TABLE users (
 CREATE TABLE work (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    work_time INTEGER
+    work_time INTEGER,
+    time_posted TIMESTAMPTZ
 );
 
 CREATE TABLE play (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    play_time INTEGER
+    play_time INTEGER,
+    time_posted TIMESTAMPTZ
 );
 
 

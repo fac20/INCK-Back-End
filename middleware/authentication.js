@@ -1,5 +1,35 @@
-const bcrypt = require('bcryptjs');
-const { parse } = require('cookie');
-const { parse } = require('cookie');
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+const users = require('./../models/userModels');
+const db = require('./../connection');
+dotenv.config();
+const SECRET = process.env.JWT_SECRET;
 
-const SECRET = process.env.SECRET;
+function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    const error = new Error('Unauthorised!');
+    error.status = 400;
+    next(error);
+  }
+  try {
+    const token = authHeader.replace('Bearer ', '');
+    const tokenData = jwt.verify(token, SECRET);
+    console.log(tokenData);
+    //use ID to
+    users
+      .findUser(tokenData.id) //check ID actually exists
+      .then(user => {
+        console.log(user);
+        req.user = user;
+        next();
+      })
+      .catch(next);
+  } catch (e) {
+    const error = new Error('Unauthorized');
+    error.status = 401;
+    next(error);
+  }
+}
+
+module.exports = authenticate;

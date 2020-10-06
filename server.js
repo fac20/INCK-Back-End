@@ -2,6 +2,7 @@
 const express = require('express');
 require('dotenv').config();
 const handleErrors = require('./middleware/errorHandling');
+const authenticate = require('./middleware/authentication');
 const cookieParser = require('cookie-parser');
 const usersHandlers = require('./handlers/usersHandlers');
 const workHandlers = require('./handlers/workHandlers');
@@ -25,11 +26,11 @@ server.use(cookieParser());
 server.post('/signup', usersHandlers.signup);
 server.post('/login', usersHandlers.login);
 
-// //users change password (PUT)
+// users change password (PUT)
 // server.put('/change-password', usersHandlers.changePass);
 
 // //submit work and play log
-// server.post('/post-work', workHandlers.addWork);
+server.post('/post-work', authenticate, workHandlers.addWork);
 // server.post('/post-play', playHandlers.addPlay);
 
 // //view work and play data
