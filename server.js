@@ -13,7 +13,7 @@ const server = express();
 //cors middleware allows access from our frontend on netlify
 const cors = require('cors');
 const corsOptions = {
-  origin: 'https://zenpal.netlify.app/',
+  origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
