@@ -28,6 +28,7 @@ function signup(req, res, next) {
     .catch(next);
 }
 
+//This version of login also works
 function login(req, res, next) {
   const id = req.body.id;
   const password = req.body.password;
