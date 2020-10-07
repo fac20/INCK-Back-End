@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const usersHandlers = require('./handlers/usersHandlers');
 const workHandlers = require('./handlers/workHandlers');
 const playHandlers = require('./handlers/playHandlers');
+const hostname = process.env.HOSTNAME || '0.0.0.0' || 'localhost';
 
 const server = express();
 
