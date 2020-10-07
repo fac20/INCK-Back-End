@@ -1,20 +1,20 @@
-const db = require('./../connection.js');
+const db = require('../database/connection.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 function addUser(user) {
+  console.log(user);
   return bcrypt
     .genSalt(10)
     .then(salt => bcrypt.hash(user.password, salt))
     .then(hashedPwd => {
       user.password = hashedPwd;
-      return db
-        .query(
-          'INSERT INTO users(username, password) VALUES($1, $2) RETURNING *',
-          [user.username, user.password]
-        )
-        .then(result => result.rows[0]);
+      return db.query(
+        'INSERT INTO users(username, password) VALUES($1, $2) RETURNING *',
+        [user.username, user.password]
+      );
     })
+    .then(result => result.rows[0])
     .catch(error => error);
 }
 
@@ -24,6 +24,7 @@ function findUser(id) {
     db
       .query('SELECT * FROM users WHERE id = ($1)', [id])
       .then(user => {
+        console.log('user logged from userModels: ', user);
         return user.rows[0];
       })
       //catch error
