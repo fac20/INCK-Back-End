@@ -24,7 +24,6 @@ function findUser(id) {
     db
       .query('SELECT * FROM users WHERE id = ($1)', [id])
       .then(user => {
-        //then show rows
         return user.rows[0];
       })
       //catch error

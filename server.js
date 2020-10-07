@@ -31,8 +31,10 @@ server.post('/login', usersHandlers.login);
 
 // //submit work and play log
 server.post('/post-work', authenticate, workHandlers.addWork);
-// server.post('/post-play', authenticate, playHandlers.addPlay);
-
+server.post('/post-play', authenticate, playHandlers.addPlay);
+server.get('/work', (req, res) => {
+  res.send('<h1>hello work</h1>');
+});
 // //view work and play data
 // server.get('/work', workHandlers.getWork);
 // server.get('/play', playHandlers.getPlay);

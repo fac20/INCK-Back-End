@@ -4,7 +4,8 @@ require('dotenv').config;
 const build = require('../build');
 const db = require('../connection');
 const { addUser, findUser } = require('./../models/userModels');
-
+const usersHandlers = require('./../handlers/usersHandlers');
+const server = require('./../server');
 /* All model tests */
 //finduser
 //test signup- has user been added to db table?
@@ -19,7 +20,8 @@ test('Signing up a new user', t => {
       .then(data => findUser(data.id))
       .then(user => {
         username = user.username;
-        console.log('username :', username);
+        password = user.password;
+        console.log('username :', password);
         t.equal(username, 'zenny');
         t.end();
       })
@@ -30,7 +32,20 @@ test('Signing up a new user', t => {
   });
 });
 //login- will you recieve access token on login with correct username and password?
-
+test('Logging in', t => {
+  build().then(() => {
+    supertest(server)
+      .post('/login')
+      .send({ body: { id: 1, password: 'zen2020' } })
+      // .set({}) authorisation header here if needed
+      .expect(200)
+      .expect('content-type', 'application-json')
+      .end((err, res) => {
+        t.error(err);
+        t.end();
+      });
+  });
+});
 //authenticate- do you have access to some route that is logged-in user only?
 //are you able to access a route only for authorised users?
 
