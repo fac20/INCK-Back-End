@@ -2,7 +2,7 @@ const db = require('./../connection.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-//This functions actually will add a user to the Heroku database
+//This function actually will add a user to the Heroku database
 function addUser(user) {
   return bcrypt
     .genSalt(10)
@@ -23,13 +23,9 @@ function addUser(user) {
 function findUser(id) {
   return (
     db
-      .query('SELECT * FROM users WHERE id = ($1)', [id])
-      .then(user => {
-        //then show rows
-        return user.rows[0];
-      })
-      //catch error
-      .catch(error => error)
+      .query('SELECT * FROM users WHERE id= ($1)', [id])
+      //this returns nothing in rows
+      .then(result => result.rows[0])
   );
 }
 
