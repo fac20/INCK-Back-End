@@ -1,7 +1,8 @@
-const db = require('./../connection.js');
+const db = require('../database/connection.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+//This function actually will add a user to the Heroku database
 function addUser(user) {
   return bcrypt
     .genSalt(10)

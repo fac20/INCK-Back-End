@@ -1,11 +1,13 @@
 const test = require('tape');
 const supertest = require('supertest');
 require('dotenv').config;
-const build = require('../build');
-const db = require('../connection');
+const build = require('../database/build');
+const db = require('../database/connection');
 const { addUser, findUser } = require('./../models/userModels');
 const usersHandlers = require('./../handlers/usersHandlers');
 const server = require('./../server');
+const bcrypt = require('bcryptjs');
+
 /* All model tests */
 //finduser
 //test signup- has user been added to db table?
@@ -36,12 +38,18 @@ test('Logging in', t => {
   build().then(() => {
     supertest(server)
       .post('/login')
-      .send({ body: { id: 1, password: 'zen2020' } })
+      //if we put this in body, we need to reference it by req.body.body.id
+      .send({ id: 1, password: 'beyonce' })
       // .set({}) authorisation header here if needed
       .expect(200)
-      .expect('content-type', 'application-json')
+      .expect('content-type', 'application/json; charset=utf-8')
       .end((err, res) => {
         t.error(err);
+        console.log(res.body);
+        t.ok(
+          Object.keys(res.body).includes('access_token'),
+          'this will make it not null'
+        );
         t.end();
       });
   });

@@ -1,4 +1,4 @@
-const db = require('./../connection.js');
+const db = require('../database/connection.js');
 
 function addPlayTime(time) {
   return db
