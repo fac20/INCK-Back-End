@@ -24,7 +24,7 @@ CREATE TABLE play (
 --  Insert data into table for testing
 
 INSERT INTO users (username,password) VALUES
-('TheBaddestB','$2a$10$V3Uh21Jp5ynQeYv6MLojF.fk7nOJ/0OCKGewoRJ5.CKDvo8RK.wUi'),
+('TheBaddestB', '$2a$10$k/UPzwvZmAl3CGBzlym4.eZ3kjW.6F2IR2OOHybHrwFLaauA6Ibda'),
 ('Santa25', 'hoehoe'),
 ('CodeWizzard', 'npmInstall1')
 ;

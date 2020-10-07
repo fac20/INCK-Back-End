@@ -14,23 +14,14 @@ const bcrypt = require('bcryptjs');
 
 //login- will you receive access token on login with correct username and password?
 test('Logging in', t => {
-  //salt+hash password
-  let properPassword;
-  bcrypt
-    .genSalt(10)
-    .then(salt => bcrypt.hash('beyonce', salt))
-    .then(hashedPwd => {
-      properPassword = hashedPwd;
-    });
-
   build().then(() => {
     supertest(server)
       .post('/login')
       //if we put this in body, we need to reference it by req.body.body.id
-      .send({ id: 1, password: properPassword })
+      .send({ id: 1, password: 'beyonce' })
       // .set({}) authorisation header here if needed
       .expect(200)
-      .expect('content-type', 'application-json')
+      .expect('content-type', 'application/json; charset=utf-8')
       .end((err, res) => {
         t.error(err);
         t.end();
