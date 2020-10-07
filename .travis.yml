@@ -7,8 +7,8 @@ install:
   - npm ci
 services:
   - postgresql
-# before_script:
-#   - npm install
+before_script:
+  - psql -c 'create database test_db;' -U postgres
 cache:
   # Caches $HOME/.npm when npm ci is default script command
   # Caches node_modules in all other cases
