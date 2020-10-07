@@ -27,19 +27,10 @@ CREATE TABLE play
 
 --  Insert data into table for testing
 
-<<<<<<< HEAD
 INSERT INTO users (username,password) VALUES
 ('TheBaddestB', '$2a$10$k/UPzwvZmAl3CGBzlym4.eZ3kjW.6F2IR2OOHybHrwFLaauA6Ibda'),
 ('Santa25', 'hoehoe'),
 ('CodeWizzard', 'npmInstall1')
-=======
-INSERT INTO users
-    (username,password)
-VALUES
-    ('TheBaddestB', 'beyonce'),
-    ('Santa25', 'hoehoe'),
-    ('CodeWizzard', '$2a$10$y.mYjyvzd0FZ3FtP7PpPvOhBmSOdQympl8Q57E9Q5Hy10r8iWRCQy')
->>>>>>> main
 ;
 
 INSERT INTO work

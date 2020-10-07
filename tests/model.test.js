@@ -1,8 +1,8 @@
 const test = require('tape');
 const supertest = require('supertest');
 require('dotenv').config;
-const build = require('../build');
-const db = require('../connection');
+const build = require('../database/build');
+const db = require('../database/connection');
 const { addUser, findUser } = require('./../models/userModels');
 const usersHandlers = require('./../handlers/usersHandlers');
 const server = require('./../server');
