@@ -24,6 +24,11 @@ test('Logging in', t => {
       .expect('content-type', 'application/json; charset=utf-8')
       .end((err, res) => {
         t.error(err);
+        console.log(res.body);
+        t.ok(
+          Object.keys(res.body).includes('access_token'),
+          'this will make it not null'
+        );
         t.end();
       });
   });
