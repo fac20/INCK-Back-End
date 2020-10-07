@@ -6,9 +6,14 @@ const SECRET = process.env.JWT_SECRET;
 
 function signup(req, res, next) {
   const userData = req.body;
+  console.log(userData);
   users
     .addUser(userData)
     .then(user => {
+      console.log(
+        'logged from back inside the handler after returning from model',
+        user
+      );
       const token = jwt.sign(
         {
           id: user.id
@@ -36,7 +41,7 @@ function login(req, res, next) {
     .findUser(id)
     .then(user => {
       //make sure the password they just submitted matches the same one in the database
-      console.log(user);
+      console.log('user logged from userHandlers: ', user);
       const match = bcrypt.compareSync(password, user.password);
       //if there is a match, sign a token and send it to them
       if (match) {
