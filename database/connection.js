@@ -3,7 +3,7 @@
 //npm install pg which is the node-postgres library for connecting and querying a postgreSQL database.
 const pg = require('pg');
 const dotenv = require('dotenv');
-let databaseurl = process.env.DATABASE_URL;
+const databaseurl = process.env.DATABASE_URL;
 
 dotenv.config();
 
