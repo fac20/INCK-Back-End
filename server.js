@@ -13,12 +13,12 @@ const server = express();
 //cors middleware allows access from our frontend on netlify
 const cors = require('cors');
 const corsOptions = {
-  Access-Control-Allow-Origin: '*',
+  origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 //server middleware
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.json());
 server.use(cookieParser());
 
