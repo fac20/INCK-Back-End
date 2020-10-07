@@ -38,6 +38,15 @@ function addWork(req, res, next) {
 // 		.catch(next);
 // }
 
+function getWork() {}
+
+function modifyWork(userWork) {}
+
+function deleteWork(workID) {}
+
 module.exports = {
-  addWork
+  addWork,
+  getWork,
+  modifyWork,
+  deleteWork
 };

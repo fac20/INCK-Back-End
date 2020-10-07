@@ -37,7 +37,7 @@ function login(req, res, next) {
     .findUser(id)
     .then(user => {
       //make sure the password they just submitted matches the same one in the database
-      console.log('user in login line 40', user.password);
+      console.log(user);
       const match = bcrypt.compareSync(password, user.password);
       //if there is a match, sign a token and send it to them
       if (match) {

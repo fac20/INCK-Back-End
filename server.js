@@ -7,18 +7,19 @@ const cookieParser = require('cookie-parser');
 const usersHandlers = require('./handlers/usersHandlers');
 const workHandlers = require('./handlers/workHandlers');
 const playHandlers = require('./handlers/playHandlers');
+const hostname = process.env.HOSTNAME || '0.0.0.0' || 'localhost';
 
 const server = express();
 
 //cors middleware allows access from our frontend on netlify
 const cors = require('cors');
 const corsOptions = {
-  origin: 'https://zenpal.netlify.app/',
+  origin: '*',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 //server middleware
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.json());
 server.use(cookieParser());
 
@@ -31,8 +32,10 @@ server.post('/login', usersHandlers.login);
 
 // //submit work and play log
 server.post('/post-work', authenticate, workHandlers.addWork);
-// server.post('/post-play', authenticate, playHandlers.addPlay);
-
+server.post('/post-play', authenticate, playHandlers.addPlay);
+server.get('/work', (req, res) => {
+  res.send('<h1>hello work</h1>');
+});
 // //view work and play data
 // server.get('/work', workHandlers.getWork);
 // server.get('/play', playHandlers.getPlay);

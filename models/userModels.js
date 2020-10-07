@@ -23,9 +23,12 @@ function addUser(user) {
 function findUser(id) {
   return (
     db
-      .query('SELECT * FROM users WHERE id= ($1)', [id])
-      //this returns nothing in rows
-      .then(result => result.rows[0])
+      .query('SELECT * FROM users WHERE id = ($1)', [id])
+      .then(user => {
+        return user.rows[0];
+      })
+      //catch error
+      .catch(error => error)
   );
 }
 

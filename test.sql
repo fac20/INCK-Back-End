@@ -1,21 +1,25 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users, work, play CASCADE;
+    DROP TABLE IF EXISTS users, work, play
+    CASCADE;
 
 
-CREATE TABLE users (
+CREATE TABLE users
+(
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE work (
+CREATE TABLE work
+(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
     work_time INTEGER
 );
 
-CREATE TABLE play (
+CREATE TABLE play
+(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
     play_time INTEGER
@@ -23,22 +27,35 @@ CREATE TABLE play (
 
 --  Insert data into table for testing
 
+<<<<<<< HEAD
 INSERT INTO users (username,password) VALUES
 ('TheBaddestB', '$2a$10$k/UPzwvZmAl3CGBzlym4.eZ3kjW.6F2IR2OOHybHrwFLaauA6Ibda'),
 ('Santa25', 'hoehoe'),
 ('CodeWizzard', 'npmInstall1')
+=======
+INSERT INTO users
+    (username,password)
+VALUES
+    ('TheBaddestB', 'beyonce'),
+    ('Santa25', 'hoehoe'),
+    ('CodeWizzard', '$2a$10$y.mYjyvzd0FZ3FtP7PpPvOhBmSOdQympl8Q57E9Q5Hy10r8iWRCQy')
+>>>>>>> main
 ;
 
-INSERT INTO work (user_id,work_time) VALUES
-(1,69),
-(2,30),
-(3,20)
+INSERT INTO work
+    (user_id,work_time)
+VALUES
+    (1, 69),
+    (2, 30),
+    (3, 20)
 ;
 
-INSERT INTO play (user_id,play_time) VALUES
-(1,30),
-(2,60),
-(3,69)
+INSERT INTO play
+    (user_id,play_time)
+VALUES
+    (1, 30),
+    (2, 60),
+    (3, 69)
 ;
 
 COMMIT;
