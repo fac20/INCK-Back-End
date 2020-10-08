@@ -9,8 +9,8 @@ function signup(req, res, next) {
   const userData = req.body;
   findUserByName(req.body.username)
     .then(user => {
+      console.log('do we see this one?', user);
       if (user) {
-        console.log(user);
         res.status(409).send('<h1>Username already in database</h1>');
       } else {
         users
