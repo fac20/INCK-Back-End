@@ -54,6 +54,22 @@ test('Logging in', t => {
       });
   });
 });
+
+test('Signing up with a username already there', t => {
+  build().then(() => {
+    supertest(server)
+      .post('/signup')
+      //if we put this in body, we need to reference it by req.body.body.id
+      .send({ username: 'TheBaddestB', password: 'beyonce' })
+      // .set({}) authorisation header here if needed
+      .expect(409)
+      .expect('content-type', 'text/html; charset=utf-8')
+      .end((err, res) => {
+        t.error(err);
+        t.end();
+      });
+  });
+});
 //authenticate- do you have access to some route that is logged-in user only?
 //are you able to access a route only for authorised users?
 
