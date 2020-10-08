@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const usersHandlers = require('./handlers/usersHandlers');
 const workHandlers = require('./handlers/workHandlers');
 const playHandlers = require('./handlers/playHandlers');
+const dataHandlers = require('./handlers/dataHandlers');
 const hostname = process.env.HOSTNAME || '0.0.0.0' || 'localhost';
 
 const server = express();
@@ -33,20 +34,21 @@ server.post('/login', usersHandlers.login);
 // //submit work and play log
 server.post('/post-work', authenticate, workHandlers.addWork);
 server.post('/post-play', authenticate, playHandlers.addPlay);
-server.get('/work', (req, res) => {
+server.get('/worktest', (req, res) => {
   res.send('<h1>hello work</h1>');
 });
 // //view work and play data
-// server.get('/work', workHandlers.getWork);
-// server.get('/play', playHandlers.getPlay);
+server.get('/work', authenticate, workHandlers.getWork);
+server.get('/play', authenticate, playHandlers.getPlay);
+// server.get('/data', authenticate, dataHandlers.getAllData); //would give all work and play data for one person
 
 // //edit work and play data
-// server.put('/edit-work', workHandlers.modifyWork);
-// server.put('/edit-play', playHandlers.modifyPlay);
+// server.put('/edit-work', authenticate, workHandlers.modifyWork);
+// server.put('/edit-play', authenticate, playHandlers.modifyPlay);
 
 // //delete work and play data
-// server.delete('/delete-work', workHandlers.deleteWork);
-// server.delete('/delete-play', playHandlers.deletePlay);
+// server.delete('/delete-work', authenticate, workHandlers.deleteWork);
+// server.delete('/delete-play', authenticate, playHandlers.deletePlay);
 
 //error handling middleware
 server.use(handleErrors);

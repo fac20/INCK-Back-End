@@ -8,6 +8,25 @@ function addWork(userWork) {
   );
 }
 
+function getWorkTimebyID(num) {
+  return db
+  .query('SELECT * FROM work WHERE user_id=$1', [num])
+  .then(result => result.rows)
+  .catch(error => error);
+
+}
+
+function updateWorkTime() {
+  
+}
+
+function deleteWorkTime (timeID) {
+  return db.query('DELETE FROM work WHERE id=($1)', [timeID]);
+}
+
 module.exports = {
-  addWork
+  addWork,
+  getWorkTimebyID,
+  updateWorkTime,
+  deleteWorkTime
 };

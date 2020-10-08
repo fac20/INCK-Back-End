@@ -16,7 +16,7 @@ function authenticate(req, res, next) {
   try {
     const token = authHeader.replace('Bearer ', '');
     const tokenData = jwt.verify(token, SECRET);
-    console.log(tokenData);
+    // console.log("tokendata-authentication", tokenData);
     //use ID to
     users
       .findUser(tokenData.id) //check ID actually exists
