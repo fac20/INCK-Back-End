@@ -1,10 +1,18 @@
 const users = require('../models/userModels');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { findUserByName } = require('../models/userModels');
 require('dotenv').config();
 const SECRET = process.env.JWT_SECRET;
 
 function signup(req, res, next) {
+  //check username sent is not already in db
+  console.log(req.body.username);
+  if (findUserByName(req.body.username)) {
+    //send error back to client
+    res.status(409).send('<h1>Username already in database</h1>');
+  }
+
   const userData = req.body;
   users
     .addUser(userData)
