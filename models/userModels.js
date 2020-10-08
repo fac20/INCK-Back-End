@@ -19,7 +19,6 @@ function addUser(user) {
     .catch(error => error);
 }
 
-//username or password to compare
 function findUser(id) {
   return (
     db
@@ -32,7 +31,20 @@ function findUser(id) {
   );
 }
 
+function findUserByName(username) {
+  return (
+    db
+      .query('SELECT * FROM users WHERE username = ($1)', [username])
+      .then(user => {
+        return user.rows[0];
+      })
+      //catch error
+      .catch(error => error)
+  );
+}
+
 module.exports = {
   addUser,
-  findUser
+  findUser,
+  findUserByName
 };
