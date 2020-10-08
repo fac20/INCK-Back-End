@@ -23,7 +23,6 @@ test('Signing up a new user', t => {
       .then(user => {
         username = user.username;
         password = user.password;
-        console.log('username :', password);
         t.equal(username, 'zenny');
         t.end();
       })
@@ -39,13 +38,12 @@ test('Logging in', t => {
     supertest(server)
       .post('/login')
       //if we put this in body, we need to reference it by req.body.body.id
-      .send({ id: 1, password: 'beyonce' })
+      .send({ username: 'TheBaddestB', password: 'beyonce' })
       // .set({}) authorisation header here if needed
       .expect(200)
       .expect('content-type', 'application/json; charset=utf-8')
       .end((err, res) => {
         t.error(err);
-        console.log(res.body);
         t.ok(
           Object.keys(res.body).includes('access_token'),
           'this will make it not null'
