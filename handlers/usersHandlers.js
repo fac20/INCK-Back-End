@@ -6,32 +6,34 @@ require('dotenv').config();
 const SECRET = process.env.JWT_SECRET;
 
 function signup(req, res, next) {
-  //check username sent is not already in db
-  console.log(req.body.username);
-  if (findUserByName(req.body.username)) {
-    //send error back to client
-    res.status(409).send('<h1>Username already in database</h1>');
-  }
-
   const userData = req.body;
-  users
-    .addUser(userData)
+  findUserByName(req.body.username)
     .then(user => {
-      const token = jwt.sign(
-        {
-          id: user.id
-        },
-        SECRET,
-        {
-          expiresIn: '1h'
-        }
-      );
-      const response = {
-        id: user.id,
-        username: user.username,
-        access_token: token
-      };
-      res.status(201).send(response);
+      console.log('do we see this one?', user);
+      if (user) {
+        res.status(409).send('<h1>Username already in database</h1>');
+      } else {
+        users
+          .addUser(userData)
+          .then(user => {
+            const token = jwt.sign(
+              {
+                id: user.id
+              },
+              SECRET,
+              {
+                expiresIn: '1h'
+              }
+            );
+            const response = {
+              id: user.id,
+              username: user.username,
+              access_token: token
+            };
+            res.status(201).send(response);
+          })
+          .catch(next);
+      }
     })
     .catch(next);
 }

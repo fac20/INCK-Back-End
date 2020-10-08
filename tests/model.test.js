@@ -18,38 +18,67 @@ test('Signing up a new user', t => {
       password: 'zen2020',
       id: 4
     };
-    addUser(data)
-      .then(data => findUser(data.id))
-      .then(user => {
-        username = user.username;
-        password = user.password;
-        console.log('username :', password);
-        t.equal(username, 'zenny');
-        t.end();
-      })
-      .catch(error => {
-        t.error(error);
+    supertest(server)
+      .post('/signup')
+      .send(data)
+      .expect(201)
+      .end((err, res) => {
+        t.error(err);
+        username = res.body.username;
+        t.equal(username, 'zenny', 'Usernames match');
         t.end();
       });
   });
 });
+
 //login- will you recieve access token on login with correct username and password?
 test('Logging in', t => {
   build().then(() => {
     supertest(server)
       .post('/login')
       //if we put this in body, we need to reference it by req.body.body.id
-      .send({ id: 1, password: 'beyonce' })
+      .send({ username: 'TheBaddestB', password: 'beyonce' })
       // .set({}) authorisation header here if needed
       .expect(200)
       .expect('content-type', 'application/json; charset=utf-8')
       .end((err, res) => {
         t.error(err);
-        console.log(res.body);
         t.ok(
           Object.keys(res.body).includes('access_token'),
-          'this will make it not null'
+          'check response object contains an access token key'
         );
+        t.end();
+      });
+  });
+});
+
+test('Signing up with a username already there', t => {
+  build().then(() => {
+    supertest(server)
+      .post('/signup')
+      //if we put this in body, we need to reference it by req.body.id
+      .send({ username: 'TheBaddestB', password: 'beyonce' })
+      // .set({}) authorisation header here if needed
+      .expect(409)
+      .expect('content-type', 'text/html; charset=utf-8')
+      .end((err, res) => {
+        t.error(err);
+        t.end();
+      });
+  });
+});
+
+test('checking signup handler, new signup, fail on purpose', t => {
+  build().then(() => {
+    supertest(server)
+      .post('/signup')
+      //if we put this in body, we need to reference it by req.body.id
+      .send({ username: 'TEST1', password: 'beyonce' })
+      // .set({}) authorisation header here if needed
+      .expect(201)
+      .expect('content-type', 'application/json; charset=utf-8')
+      .end((err, res) => {
+        t.error(err);
         t.end();
       });
   });
