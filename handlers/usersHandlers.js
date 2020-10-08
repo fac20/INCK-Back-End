@@ -28,13 +28,11 @@ function signup(req, res, next) {
     .catch(next);
 }
 
-//This version of login also works
 function login(req, res, next) {
-  const id = req.body.id;
+  const username = req.body.username;
   const password = req.body.password;
-  console.log('password', password);
   users
-    .findUser(id)
+    .findUserByName(username)
     .then(user => {
       //make sure the password they just submitted matches the same one in the database
       console.log(user);
