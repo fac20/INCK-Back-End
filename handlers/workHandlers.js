@@ -1,14 +1,22 @@
 const work = require('./../models/workModels');
 const jwt = require('jsonwebtoken');
 require('dotenv').config;
+const SECRET = process.env.JWT_SECRET;
+
+function getIDfromToken (header) {
+  const token = header.replace('Bearer ', '');
+  const tokenData = jwt.verify(token, SECRET);
+  return tokenData.id;
+}
 
 function addWork(req, res, next) {
-  console.log(req);
-  const id = req.user.id;
+  const token = req.headers.authorization.replace('Bearer ', '');
+  const tokenData = jwt.verify(token, SECRET);
+  // console.log(req);
+  const id = tokenData.id;
   const workObj = req.body;
-
   const userWork = {
-    id: id,
+    "id": id,
     timeSpent: workObj.time,
     timeSubmitted: workObj.dateTime
   };
@@ -38,15 +46,26 @@ function addWork(req, res, next) {
 // 		.catch(next);
 // }
 
-function getWork() {}
+function getWork(req, res, next) {
+  const token = req.headers.authorization.replace('Bearer ', '');
+  const tokenData = jwt.verify(token, SECRET);
+  const id = tokenData.id;
+  work.getWorkTimebyID(id)
+  .then(results => {
+    res.status(200)
+    .send(results);
+  }).catch(next)
+  
+}
 
-function modifyWork(userWork) {}
+function modifyWork(req, res, next) {}
 
-function deleteWork(workID) {}
+function deleteWork(req, res, next) {}
+
 
 module.exports = {
   addWork,
   getWork,
   modifyWork,
-  deleteWork
+  deleteWork,
 };
