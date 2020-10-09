@@ -26,6 +26,19 @@ function addPlay(req, res, next) {
     .catch(next);
 }
 
+function getPlay(req, res, next) {
+  const token = req.headers.authorization.replace('Bearer ', '');
+  const tokenData = jwt.verify(token, SECRET);
+  const id = tokenData.id;
+  play.getPlayTimebyID(id)
+  .then(results => {
+    res.status(200)
+    .send(results);
+  }).catch(next)
+  
+}
+
 module.exports = {
-  addPlay
+  addPlay,
+  getPlay
 };
